@@ -1,0 +1,15 @@
+//
+//  Common.pch
+//  Endless Runner
+//
+//  Created by Denys Khlivnyy on 2/20/15.
+//  Copyright (c) 2015 Denys Khlivnyy. All rights reserved.
+//
+
+#ifndef Endless_Runner_Common_pch
+#define Endless_Runner_Common_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif
