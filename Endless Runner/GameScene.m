@@ -136,9 +136,9 @@
         player.anchorPoint = CGPointMake(0.5, 0.5);
         player.position = [touch locationInNode:self];
         
-        if (player.position.y < player.size.height / 2) {
-            player.position = CGPointMake(player.position.x, (player.size.height / 2) + 1 );
-        }
+//        if (player.position.y < player.size.height / 2) {
+//            player.position = CGPointMake(player.position.x, (player.size.height / 2) + 1 );
+//        }
     }
 }
 
@@ -182,6 +182,15 @@
     
     self.score = self.score + (backgroundMoveSpeed * timeSinceLast / 100);
     
+    Player *player = self.currentPlayer;
+    float delta =
+    (self.manager.accelerometerData.acceleration.x - self.baseline) * accelerometerMultiplier;
+    
+    player.position = CGPointMake(player.position.x, player.position.y - delta);
+    
+    if (player.position.y < player.size.height / 2) {
+        player.position = CGPointMake(player.position.x, (player.size.height / 2) + 1 );
+    }
     
 }
 
