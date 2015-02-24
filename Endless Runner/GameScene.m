@@ -144,9 +144,8 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    Player *player = self.currentPlayer;
-    if (player.selected) {
-        player.selected = NO;
+    if (self.currentPlayer.selected) {
+        self.currentPlayer.selected = NO;
     }
 }
 
