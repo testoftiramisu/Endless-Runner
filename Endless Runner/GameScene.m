@@ -14,6 +14,14 @@
 
 - (id)initWithSize:(CGSize)size
 {
+    self.manager = [[CMMotionManager alloc] init];
+    self.manager.accelerometerUpdateInterval = 0.1;
+    [self.manager startAccelerometerUpdates];
+    
+    [self performSelector:@selector(adjustBaseline)
+               withObject:nil
+               afterDelay:0.1];
+    
     if (self = [super initWithSize:size]) {
         self.currentBackground = [Background generateNewBackground];
         [self addChild:self.currentBackground];
@@ -22,6 +30,7 @@
     Player *player = [[Player alloc] init];
     player.anchorPoint = CGPointMake(0, 0);
     player.position = CGPointMake(100, 0);
+    self.currentPlayer = player;
     [self addChild:player];
     
     self.score = 0;
@@ -44,21 +53,66 @@
     return self;
 }
 
+- (void)adjustBaseline
+{
+    self.baseline = self.manager.accelerometerData.acceleration.x;
+}
 
 - (void)didMoveToView:(SKView *)view {
-    /* Setup your scene here */
+    
+     UISwipeGestureRecognizer *swiperRight =
+    [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                              action:@selector(handleSwipeRight:)];
+    
+    swiperRight.direction = UISwipeGestureRecognizerDirectionRight;
+    [view addGestureRecognizer:swiperRight];
+    
+    UISwipeGestureRecognizer *swiperLeft =
+    [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                              action:@selector(handleSwipeLeft:)];
+    swiperLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [view addGestureRecognizer:swiperLeft];
+}
 
+- (void)handleSwipeRight:(UIGestureRecognizer *)recognizer
+{
+    if (recognizer.state == UIGestureRecognizerStateRecognized && self.currentPlayer.selected == NO)
+    {
+        backgroundMoveSpeed += 50;
+    }
+}
 
+- (void)handleSwipeLeft:(UIGestureRecognizer *)recognizer
+{
+    if (recognizer.state == UIGestureRecognizerStateRecognized && backgroundMoveSpeed > 50 && self.currentPlayer.selected == NO) {
+        backgroundMoveSpeed -= 50;
+    }
+}
+
+- (void)willMoveFromView:(SKView *)view
+{
+    for (UIGestureRecognizer *recognizer in view.gestureRecognizers) {
+        [view removeGestureRecognizer:recognizer];
+    }
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    UITouch *touch = [touches anyObject];
+    SKSpriteNode *touchedNode = (SKSpriteNode *)[self nodeAtPoint:[touch locationInNode:self]];
+    
+    if (touchedNode.name == playerName) {
+        Player *player = (Player *)touchedNode;
+        player.selected = YES;
+        return;
+    }
+    
     // action to move the node that runs it by vector
     // of x and y components with duration in seconds
     SKAction *moveUp = [SKAction moveBy:CGVectorMake(0, 100) duration:0.8];
     
     // same as before, but it is opposite vector to go down, and it is a bit
     // faster, since gravity accelerates you
-    
     SKAction *moveDown = [SKAction moveBy:CGVectorMake(0, - 100) duration:0.6];
     
     // sequence action allows you to compound few actions into one
@@ -67,10 +121,33 @@
     // childNodeWithName: method allows you to find any node in hierarchy with
     // certain name. This is useful if you don't want to store things
     // as instance variables or properties
-    Player *player = (Player *)[self childNodeWithName:playerName];
+    // Player *player = (Player *)[self childNodeWithName:playerName];
     
     // after creating all actions we tell character to execute them
-    [player runAction:seq];
+    [self.currentPlayer runAction:seq];
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    Player *player = self.currentPlayer;
+    
+    if (player.selected) {
+        player.anchorPoint = CGPointMake(0.5, 0.5);
+        player.position = [touch locationInNode:self];
+        
+        if (player.position.y < player.size.height / 2) {
+            player.position = CGPointMake(player.position.x, (player.size.height / 2) + 1 );
+        }
+    }
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    Player *player = self.currentPlayer;
+    if (player.selected) {
+        player.selected = NO;
+    }
 }
 
 - (void)update:(CFTimeInterval)currentTime {
@@ -103,6 +180,10 @@
         [self addChild:tempBackground];
         self.currentBackground = tempBackground;
     }
+    
+    self.score = self.score + (backgroundMoveSpeed * timeSinceLast / 100);
+    
+    
 }
 
 @end
