@@ -28,8 +28,7 @@
     }
     
     Player *player = [[Player alloc] init];
-    player.anchorPoint = CGPointMake(0, 0);
-    player.position = CGPointMake(100, 0);
+    player.position = CGPointMake(100, (player.size.height / 2) + 1);
     self.currentPlayer = player;
     [self addChild:player];
     
@@ -135,10 +134,6 @@
     if (player.selected) {
         player.anchorPoint = CGPointMake(0.5, 0.5);
         player.position = [touch locationInNode:self];
-        
-//        if (player.position.y < player.size.height / 2) {
-//            player.position = CGPointMake(player.position.x, (player.size.height / 2) + 1 );
-//        }
     }
 }
 
