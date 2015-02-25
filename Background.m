@@ -10,7 +10,7 @@
 
 @implementation Background
 
-+ (Background *)generateNewBackground
++ (Background *)generateNewBackground:(CGSize)screenSize
 {
     Background *background = [[Background alloc] initWithImageNamed:@"background"];
     background.anchorPoint = CGPointMake(0, 0);
@@ -18,17 +18,20 @@
     background.position = CGPointMake(0, 0);
     background.zPosition = 1;
     
+    // background buttom edge
     background.physicsBody =
-    [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, 30) toPoint:CGPointMake(background.size.width, 30)];
+    [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, 0) toPoint:CGPointMake(background.size.width, 0)];
     background.physicsBody.collisionBitMask = (unsigned)playerCollisionBitmask;
     
+    // Background top edge
     SKNode *topCollider = [SKNode node];
     topCollider.position = CGPointMake(0, 0);
     topCollider.physicsBody =
-    [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, background.size.height - 30)
-                                 toPoint:CGPointMake(background.size.width, background.size.height - 30)];
+    [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, screenSize.height)
+                                 toPoint:CGPointMake(background.size.width, screenSize.height)];
+    topCollider.physicsBody.collisionBitMask =  1;
     
-    
+    [background addChild:topCollider];
     return background;
 }
 

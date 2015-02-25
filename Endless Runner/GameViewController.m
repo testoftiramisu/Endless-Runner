@@ -48,6 +48,9 @@
     GameScene *scene = [GameScene sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     
+    NSLog(@"width: %f", skView.bounds.size.width);
+    NSLog(@"height: %f", skView.bounds.size.height);
+    
     // Present the scene.
     [skView presentScene:scene];
 }

@@ -23,9 +23,11 @@
                afterDelay:0.1];
     
     if (self = [super initWithSize:size]) {
-        self.currentBackground = [Background generateNewBackground];
+        self.currentBackground = [Background generateNewBackground:size];
         [self addChild:self.currentBackground];
     }
+    
+    self.physicsWorld.gravity = CGVectorMake(0, globalGravity);
     
     Player *player = [[Player alloc] init];
     player.position = CGPointMake(100, (player.size.height / 2) + 1);
@@ -36,7 +38,7 @@
     self.scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"Helvetica"];
     self.scoreLabel.fontSize = 30;
     self.scoreLabel.color = [UIColor whiteColor];
-    self.scoreLabel.position = CGPointMake(size.width - 50, 300);
+    self.scoreLabel.position = CGPointMake(size.width - 50, 280);
     self.scoreLabel.zPosition = 100;
     [self addChild:self.scoreLabel];
     
@@ -59,32 +61,53 @@
 
 - (void)didMoveToView:(SKView *)view {
     
-     UISwipeGestureRecognizer *swiperRight =
+    // Swipe to right
+    UISwipeGestureRecognizer *swiperRight =
     [[UISwipeGestureRecognizer alloc] initWithTarget:self
                                               action:@selector(handleSwipeRight:)];
     
     swiperRight.direction = UISwipeGestureRecognizerDirectionRight;
     [view addGestureRecognizer:swiperRight];
     
+    // Swipe to left
     UISwipeGestureRecognizer *swiperLeft =
     [[UISwipeGestureRecognizer alloc] initWithTarget:self
                                               action:@selector(handleSwipeLeft:)];
     swiperLeft.direction = UISwipeGestureRecognizerDirectionLeft;
     [view addGestureRecognizer:swiperLeft];
+    
+    // Long tap
+    UILongPressGestureRecognizer *tapper =
+    [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                  action:@selector(tappedScreen:)];
+    tapper.minimumPressDuration = 0.1;
+    [view addGestureRecognizer:tapper];
 }
 
 - (void)handleSwipeRight:(UIGestureRecognizer *)recognizer
 {
-    if (recognizer.state == UIGestureRecognizerStateRecognized && self.currentPlayer.selected == NO)
-    {
-        backgroundMoveSpeed += 50;
+    if (recognizer.state == UIGestureRecognizerStateRecognized && self.currentPlayer.selected == NO){
+        // disabled for now
+        // backgroundMoveSpeed += 50;
     }
 }
 
 - (void)handleSwipeLeft:(UIGestureRecognizer *)recognizer
 {
     if (recognizer.state == UIGestureRecognizerStateRecognized && backgroundMoveSpeed > 50 && self.currentPlayer.selected == NO) {
-        backgroundMoveSpeed -= 50;
+        // disabled for now
+        // backgroundMoveSpeed -= 50;
+    }
+}
+
+- (void)tappedScreen:(UITapGestureRecognizer *)recognizer
+{
+    Player *player = self.currentPlayer;
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        player.accelerating = YES;
+    }
+    if (recognizer.state == UIGestureRecognizerStateEnded) {
+        player.accelerating = NO;
     }
 }
 
@@ -146,6 +169,7 @@
 
 - (void)update:(CFTimeInterval)currentTime {
     
+
     CFTimeInterval timeSinceLast = currentTime - self.lastUpdateTimeInterval;
     self.lastUpdateTimeInterval = currentTime;
 
@@ -154,7 +178,8 @@
         timeSinceLast = 1.0 / 60.0;
         self.lastUpdateTimeInterval = currentTime;
     }
-    
+
+    // Moving of the background
     [self enumerateChildNodesWithName:backgroundName
                            usingBlock:^(SKNode *node, BOOL *stop) {
                                node.position = CGPointMake(node.position.x - backgroundMoveSpeed * timeSinceLast, node.position.y);
@@ -169,23 +194,30 @@
     
     if (self.currentBackground.position.x < 2) {
         // we create new background node and set it as current node
-        Background *tempBackground = [Background generateNewBackground];
+        Background *tempBackground = [Background generateNewBackground:self.size];
         tempBackground.position = CGPointMake(self.currentBackground.size.width, 0);
         [self addChild:tempBackground];
         self.currentBackground = tempBackground;
     }
     
-    self.score = self.score + (backgroundMoveSpeed * timeSinceLast / 100);
-    
     Player *player = self.currentPlayer;
     float delta =
     (self.manager.accelerometerData.acceleration.x - self.baseline) * accelerometerMultiplier;
     
+    // Player position
     player.position = CGPointMake(player.position.x, player.position.y - delta);
     
-    if (player.position.y < player.size.height / 2) {
-        player.position = CGPointMake(player.position.x, (player.size.height / 2) + 1 );
-    }
+    // Score update
+    self.score = self.score + (backgroundMoveSpeed * timeSinceLast / 100);
+    
+    [self enumerateChildNodesWithName:@"player"
+                           usingBlock:^(SKNode *node, BOOL *stop) {
+                               Player *enumeratedPlayer = (Player *)node;
+                               if (enumeratedPlayer.accelerating) {
+                                   [enumeratedPlayer.physicsBody
+                                    applyForce:CGVectorMake(0, playerJumpForce * timeSinceLast)];
+                               }
+                           }];
     
 }
 

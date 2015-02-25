@@ -11,6 +11,7 @@
 @interface Player : SKSpriteNode
 
 @property (assign) BOOL selected;
+@property (assign) BOOL accelerating;
 
 
 @end

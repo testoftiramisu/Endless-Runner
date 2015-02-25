@@ -10,6 +10,6 @@
 
 @interface Background : SKSpriteNode
 
-+ (Background *)generateNewBackground;
++ (Background *)generateNewBackground:(CGSize)size;
 
 @end
