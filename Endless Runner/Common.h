@@ -16,6 +16,6 @@ static NSInteger accelerometerMultiplier = 15;
 static NSInteger playerMass = 50;
 static NSInteger playerCollisionBitmask = 1;
 static NSInteger playerJumpForce = 8000000;
-static NSInteger globalGravity = -4.8;
+static NSInteger globalGravity = -2.8;
 
 #endif

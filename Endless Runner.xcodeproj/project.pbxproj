@@ -18,6 +18,8 @@
 		04E8F4821A97905300A9F831 /* Endless_RunnerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E8F4811A97905300A9F831 /* Endless_RunnerTests.m */; };
 		A2CAD1E51A97DC5200BD2607 /* Background.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CAD1E41A97DC5200BD2607 /* Background.m */; };
 		A2CAD1E81A97E72900BD2607 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CAD1E71A97E72900BD2607 /* Player.m */; };
+		A2CBE9CB1A9EA765009774B8 /* jump.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A2CBE9CA1A9EA765009774B8 /* jump.atlas */; };
+		A2CBE9DD1A9EB7A7009774B8 /* run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A2CBE9DC1A9EB7A7009774B8 /* run.atlas */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		A2CAD1E41A97DC5200BD2607 /* Background.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Background.m; path = ../Background.m; sourceTree = "<group>"; };
 		A2CAD1E61A97E72900BD2607 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		A2CAD1E71A97E72900BD2607 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		A2CBE9CA1A9EA765009774B8 /* jump.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = jump.atlas; sourceTree = "<group>"; };
+		A2CBE9DC1A9EB7A7009774B8 /* run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = run.atlas; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,8 @@
 				04E8F4721A97905300A9F831 /* Images.xcassets */,
 				04E8F4741A97905300A9F831 /* LaunchScreen.xib */,
 				04E8F46F1A97905300A9F831 /* Main.storyboard */,
+				A2CBE9DC1A9EB7A7009774B8 /* run.atlas */,
+				A2CBE9CA1A9EA765009774B8 /* jump.atlas */,
 				04E8F4601A97905200A9F831 /* Supporting Files */,
 			);
 			path = "Endless Runner";
@@ -222,7 +228,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				04E8F4761A97905300A9F831 /* LaunchScreen.xib in Resources */,
+				A2CBE9CB1A9EA765009774B8 /* jump.atlas in Resources */,
 				04E8F4731A97905300A9F831 /* Images.xcassets in Resources */,
+				A2CBE9DD1A9EB7A7009774B8 /* run.atlas in Resources */,
 				04E8F46B1A97905200A9F831 /* GameScene.sks in Resources */,
 				04E8F4711A97905300A9F831 /* Main.storyboard in Resources */,
 			);

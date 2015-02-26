@@ -30,7 +30,7 @@
     self.physicsWorld.gravity = CGVectorMake(0, globalGravity);
     
     Player *player = [[Player alloc] init];
-    player.position = CGPointMake(100, (player.size.height / 2) + 1);
+    player.position = CGPointMake(150, (player.size.height / 2) + 1);
     self.currentPlayer = player;
     [self addChild:player];
     

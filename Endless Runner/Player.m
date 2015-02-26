@@ -22,8 +22,28 @@
         self.physicsBody.mass = playerMass;
         self.physicsBody.collisionBitMask = (unsigned)playerCollisionBitmask;
         self.physicsBody.allowsRotation = NO;
+        [self setupAnimations];
+        [self runAction:
+         [SKAction repeatActionForever: [SKAction animateWithTextures:self.runFrames
+                                                         timePerFrame:0.05
+                                                               resize:YES
+                                                              restore:NO]] withKey:@"running"];
     }
     return self;
+}
+
+- (void)setupAnimations
+{
+    self.runFrames = [[NSMutableArray alloc] init];
+    SKTextureAtlas *runAtlas = [SKTextureAtlas atlasNamed:@"run"];
+    
+    for (int i = 0; i < [runAtlas.textureNames count] / 2; ++i) {
+        NSString *tempName = [NSString stringWithFormat:@"Run__%.3d", i];
+        SKTexture *tempTexture = [runAtlas textureNamed:tempName];
+        if (tempTexture) {
+            [self.runFrames addObject:tempTexture];
+        }
+    }
 }
 
 @end
