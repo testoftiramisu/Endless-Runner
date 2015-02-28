@@ -10,9 +10,21 @@
 
 @interface Player : SKSpriteNode
 
+typedef enum playerState {
+    playerStateRunning = 0,
+    playerStateJumping,
+    playerStateInAir
+} playerState;
+
 @property (assign) BOOL selected;
 @property (assign) BOOL accelerating;
+@property (assign, nonatomic) playerState animationState;
 @property (strong, nonatomic) NSMutableArray *runFrames;
+@property (strong, nonatomic) NSMutableArray *jumpFrames;
 
+@property (strong, nonatomic) NSMutableArray *shildOnFrames;
+@property (strong, nonatomic) NSMutableArray *shildOffFrames;
+@property (strong, nonatomic) SKSpriteNode *shield;
+@property (assign, nonatomic) BOOL shielded;
 
 @end

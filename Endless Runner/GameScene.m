@@ -182,7 +182,11 @@
                                if (enumeratedPlayer.accelerating) {
                                    [enumeratedPlayer.physicsBody
                                     applyForce:CGVectorMake(0, playerJumpForce * timeSinceLast)];
+                                   enumeratedPlayer .animationState = playerStateJumping;
+                               } else if (enumeratedPlayer.position.y < (self.currentPlayer.size.height / 2) + 1){
+                                   enumeratedPlayer.animationState = playerStateRunning;
                                }
+                               
                            }];
     
 }
