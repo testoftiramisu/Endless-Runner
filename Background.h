@@ -11,5 +11,6 @@
 @interface Background : SKSpriteNode
 
 + (Background *)generateNewBackground:(CGSize)size;
++ (Background *)generateNewParallax;
 
 @end

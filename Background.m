@@ -16,7 +16,7 @@
     background.anchorPoint = CGPointMake(0, 0);
     background.name = backgroundName;
     background.position = CGPointMake(0, 0);
-    background.zPosition = 1;
+    background.zPosition = 5;
     
     // background buttom edge
     background.physicsBody =
@@ -32,6 +32,16 @@
     topCollider.physicsBody.collisionBitMask =  1;
     
     [background addChild:topCollider];
+    return background;
+}
+
++ (Background *)generateNewParallax
+{
+    Background *background = [[Background alloc] initWithImageNamed:@"parallax"];
+    background.anchorPoint = CGPointMake(0, 0);
+    background.name = parallaxName;
+    background.position = CGPointMake(0, 0);
+    background.zPosition = 4;
     return background;
 }
 

@@ -17,7 +17,7 @@ typedef enum playerState {
 } playerState;
 
 @property (assign) BOOL selected;
-@property (assign) BOOL accelerating;
+@property (assign, nonatomic) BOOL accelerating;
 @property (assign, nonatomic) playerState animationState;
 @property (strong, nonatomic) NSMutableArray *runFrames;
 @property (strong, nonatomic) NSMutableArray *jumpFrames;
@@ -26,5 +26,7 @@ typedef enum playerState {
 @property (strong, nonatomic) NSMutableArray *shieldOffFrames;
 @property (strong, nonatomic) SKSpriteNode *shield;
 @property (assign, nonatomic) BOOL shielded;
+
+@property (strong, nonatomic) SKEmitterNode *engineEmitter;
 
 @end

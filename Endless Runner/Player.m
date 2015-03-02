@@ -32,6 +32,16 @@
         self.shield = [[SKSpriteNode alloc] init];
         self.shield.blendMode = SKBlendModeAdd;
         [self addChild:self.shield];
+        
+        self.engineEmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:
+                              [[NSBundle mainBundle] pathForResource:@"jet"
+                                                              ofType:@"sks"]];
+        self.engineEmitter.position = CGPointMake(-55, -45);
+        self.engineEmitter.name = @"jetEmitter";
+        [self addChild:self.engineEmitter];
+        self.engineEmitter.hidden = YES;
+        self.engineEmitter.zPosition = 8;
+        
     }
     return self;
 }
@@ -80,7 +90,6 @@
         if (tempTexture) {
             [self.shieldOffFrames addObject:tempTexture];
         }
-        
     }
 }
 
@@ -94,7 +103,6 @@
                                                restore:NO]]
                 withKey:@"running"];
          }
-    
     self.shielded = NO;
 }
 
@@ -135,7 +143,6 @@
         default:
             break;
     }
-    
     _animationState = animationState;
 }
 
@@ -154,13 +161,13 @@
         [self blinkRed];
         [self.shield removeActionForKey:@"shieldOn"];
         [self.shield runAction:[SKAction animateWithTextures:self.shieldOffFrames
-                                                timePerFrame:0.15
+                                                timePerFrame:0.1
                                                       resize:YES
                                                      restore:NO]
                        withKey:@"shieldOff"];
+        
     }
     _shielded = shielded;
-
 }
 
 - (void)blinkRed
@@ -172,6 +179,18 @@
                                               [SKAction colorizeWithColorBlendFactor:0.0
                                                                             duration:0.2]]];
     [self runAction:blinkRed];
+}
+
+- (void)setAccelerating:(BOOL)accelerating
+{
+    if (accelerating) {
+        if (self.engineEmitter.hidden) {
+            self.engineEmitter.hidden = NO;
+        }
+    } else {
+            self.engineEmitter.hidden = YES;
+    }
+    _accelerating = accelerating;
 }
 
 @end

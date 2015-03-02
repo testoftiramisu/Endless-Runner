@@ -9,22 +9,27 @@
 #import "GameScene.h"
 #import "Background.h"
 #import "Player.h"
+#import "Enemy.h"
+#import "Powerup.h"
 
 @implementation GameScene
 
 - (id)initWithSize:(CGSize)size
 {
-    self.manager = [[CMMotionManager alloc] init];
-    self.manager.accelerometerUpdateInterval = 0.1;
-    [self.manager startAccelerometerUpdates];
+    // Accelerometer suport disabled for now
+    // self.manager = [[CMMotionManager alloc] init];
+    // self.manager.accelerometerUpdateInterval = 0.1;
+    // [self.manager startAccelerometerUpdates];
     
-    [self performSelector:@selector(adjustBaseline)
-               withObject:nil
-               afterDelay:0.1];
+    // [self performSelector:@selector(adjustBaseline)
+    //           withObject:nil
+    //           afterDelay:0.1];
     
     if (self = [super initWithSize:size]) {
         self.currentBackground = [Background generateNewBackground:size];
         [self addChild:self.currentBackground];
+        self.currentParallax = [Background generateNewParallax];
+        [self addChild:self.currentParallax];
     }
     
     self.physicsWorld.gravity = CGVectorMake(0, globalGravity);
@@ -50,6 +55,13 @@
     [self.scoreLabel runAction:
      [SKAction repeatActionForever:
       [SKAction sequence:@[tempAction, waitAction]]]];
+    
+    for (int i = 0; i < maximumEnemies; ++i) {
+        [self addChild:[self spawnEnemy]];
+    }
+    for (int i = 0; i < maximumPowerups; ++i) {
+        [self addChild:[self spawnPowerup]];
+    }
     
     return self;
 }
@@ -117,7 +129,7 @@
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [touches anyObject];
+    __unused UITouch *touch = [touches anyObject];
     Player *player = self.currentPlayer;
     
     if (player.selected) {
@@ -135,7 +147,6 @@
 
 - (void)update:(CFTimeInterval)currentTime {
     
-
     CFTimeInterval timeSinceLast = currentTime - self.lastUpdateTimeInterval;
     self.lastUpdateTimeInterval = currentTime;
 
@@ -147,31 +158,49 @@
 
     // Moving of the background
     [self enumerateChildNodesWithName:backgroundName
-                           usingBlock:^(SKNode *node, BOOL *stop) {
-                               node.position = CGPointMake(node.position.x - backgroundMoveSpeed * timeSinceLast, node.position.y);
-                               
-                               if (node.position.x < -(node.frame.size.width + 100)) {
-                                   // if the node went completely off screen
-                                   // (with some extra pixels)
-                                   // remove it
-                                   [node removeFromParent];
-                               }
-                           }];
+                           usingBlock:^(SKNode *node, BOOL *stop)
+    {
+        node.position = CGPointMake(node.position.x - backgroundMoveSpeed * timeSinceLast, node.position.y);
+        if (node.position.x < -(node.frame.size.width + 100)) {
+            // if the node went completely off screen
+            // (with some extra pixels)
+            // remove it
+            [node removeFromParent];
+        }
+    }];
     
+    // We create new background node and set it as current node
     if (self.currentBackground.position.x < 2) {
-        // we create new background node and set it as current node
         Background *tempBackground = [Background generateNewBackground:self.size];
         tempBackground.position = CGPointMake(self.currentBackground.size.width, 0);
         [self addChild:tempBackground];
         self.currentBackground = tempBackground;
     }
     
-//    Player *player = self.currentPlayer;
-//    float delta =
-//    (self.manager.accelerometerData.acceleration.x - self.baseline) * accelerometerMultiplier;
-//    
-//    // Player position
-//    player.position = CGPointMake(player.position.x, player.position.y - delta);
+    // Moving the Parallax background
+    [self enumerateChildNodesWithName:parallaxName
+                           usingBlock:^(SKNode *node, BOOL *stop)
+    {
+        node.position = CGPointMake(node.position.x - paralaxMoveSpeed * timeSinceLast, node.position.y);
+        if (node.position.x < -(node.frame.size.width + 100)) {
+            // if the node went of the screen, remove it
+            [node removeFromParent];
+        }
+    }];
+    
+    if (self.currentParallax.position.x < 500) {
+        Background *tempParallax = [Background generateNewParallax];
+        tempParallax.position = CGPointMake(self.currentParallax.position.x + self.currentParallax.frame.size.width, 0);
+        [self addChild:tempParallax];
+        self.currentParallax = tempParallax;
+    }
+    
+    // Player *player = self.currentPlayer;
+    // float delta =
+    // (self.manager.accelerometerData.acceleration.x - self.baseline) * accelerometerMultiplier;
+    
+    // Player position
+    // player.position = CGPointMake(player.position.x, player.position.y - delta);
     
     // Score update
     self.score = self.score + (backgroundMoveSpeed * timeSinceLast / 100);
@@ -182,12 +211,50 @@
                                if (enumeratedPlayer.accelerating) {
                                    [enumeratedPlayer.physicsBody
                                     applyForce:CGVectorMake(0, playerJumpForce * timeSinceLast)];
-                                   enumeratedPlayer .animationState = playerStateJumping;
+                                   enumeratedPlayer.animationState = playerStateJumping;
                                } else if (enumeratedPlayer.position.y < (self.currentPlayer.size.height / 2) + 1){
                                    enumeratedPlayer.animationState = playerStateRunning;
                                }
                            }
      ];
+    
+    [self enumerateChildNodesWithName:@"enemy"
+                           usingBlock:^(SKNode *node, BOOL *stop)
+    {
+        Enemy *enemy = (Enemy *)node;
+        enemy.position = CGPointMake(enemy.position.x - backgroundMoveSpeed * timeSinceLast, enemy.position.y);
+        if (enemy.position.x < -200) {
+            enemy.position = CGPointMake(self.size.width +  arc4random() % 800, arc4random() % 240 + 40);
+            enemy.hidden = NO;
+        }
+    }];
+    
+    [self enumerateChildNodesWithName:@"shieldPowerup"
+                           usingBlock:^(SKNode *node, BOOL *stop)
+    {
+        Powerup *shield = (Powerup *)node;
+        shield.position = CGPointMake(shield.position.x - backgroundMoveSpeed *timeSinceLast, 5);
+        if (shield.position.x < -200) {
+            shield.position = CGPointMake(self.size.width + arc4random() % 100, 5);
+            shield.hidden = NO;
+        }
+    }];
+}
+
+- (Enemy *)spawnEnemy
+{
+    Enemy *temp = [[Enemy alloc] init];
+    temp.name = @"enemy";
+    temp.position = CGPointMake(self.size.width + arc4random() % 800, arc4random() % 240 + 40);
+    return temp;
+}
+
+- (Powerup *)spawnPowerup
+{
+    Powerup *temp = [[Powerup alloc] init];
+    temp.name = @"shieldPowerup";
+    temp.position = CGPointMake(self.size.width + arc4random() % 100, arc4random() % 240 + 40);
+    return temp;
 }
 
 @end

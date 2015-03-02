@@ -17,5 +17,14 @@ static NSInteger playerMass = 50;
 static NSInteger playerCollisionBitmask = 1;
 static NSInteger playerJumpForce = 8000000;
 static NSInteger globalGravity = -2.8;
+static NSString *parallaxName = @"parallax";
+static NSInteger paralaxMoveSpeed = 10;
+
+const static int playerBitmask = 1;
+const static int enemyBitmask = 2;
+const static int shieldPowerBitmask = 4;
+const static int groundBitmask = 8;
+const static NSInteger maximumEnemies = 3;
+const static NSInteger maximumPowerups = 1;
 
 #endif

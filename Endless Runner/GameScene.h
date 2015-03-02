@@ -11,9 +11,10 @@
 
 @class Background;
 @class Player;
-@interface GameScene : SKScene
+@interface GameScene : SKScene <SKPhysicsContactDelegate>
 
 @property (strong, nonatomic)Background *currentBackground;
+@property (strong, nonatomic)Background *currentParallax;
 @property (strong, nonatomic)Player *currentPlayer;
 @property (assign) CFTimeInterval lastUpdateTimeInterval;
 @property (strong, nonatomic) SKLabelNode *scoreLabel;
