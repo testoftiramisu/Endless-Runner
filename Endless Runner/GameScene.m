@@ -186,9 +186,8 @@
                                } else if (enumeratedPlayer.position.y < (self.currentPlayer.size.height / 2) + 1){
                                    enumeratedPlayer.animationState = playerStateRunning;
                                }
-                               
-                           }];
-    
+                           }
+     ];
 }
 
 @end

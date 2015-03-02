@@ -16,6 +16,7 @@
 		04E8F4731A97905300A9F831 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04E8F4721A97905300A9F831 /* Images.xcassets */; };
 		04E8F4761A97905300A9F831 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E8F4741A97905300A9F831 /* LaunchScreen.xib */; };
 		04E8F4821A97905300A9F831 /* Endless_RunnerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E8F4811A97905300A9F831 /* Endless_RunnerTests.m */; };
+		A2352E471AA3EFCC0023573F /* delete.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A2352E461AA3EFCC0023573F /* delete.atlas */; };
 		A29E99941AA1357900FA7D81 /* jump.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A29E99931AA1357900FA7D81 /* jump.atlas */; };
 		A29E99AB1AA146BF00FA7D81 /* shield.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A29E99AA1AA146BF00FA7D81 /* shield.atlas */; };
 		A2CAD1E51A97DC5200BD2607 /* Background.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CAD1E41A97DC5200BD2607 /* Background.m */; };
@@ -50,6 +51,7 @@
 		04E8F47B1A97905300A9F831 /* Endless RunnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Endless RunnerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04E8F4801A97905300A9F831 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04E8F4811A97905300A9F831 /* Endless_RunnerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Endless_RunnerTests.m; sourceTree = "<group>"; };
+		A2352E461AA3EFCC0023573F /* delete.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = delete.atlas; sourceTree = "<group>"; };
 		A29E99931AA1357900FA7D81 /* jump.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = jump.atlas; sourceTree = "<group>"; };
 		A29E99AA1AA146BF00FA7D81 /* shield.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = shield.atlas; sourceTree = "<group>"; };
 		A2CAD1DF1A97D94500BD2607 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				04E8F4721A97905300A9F831 /* Images.xcassets */,
 				04E8F4741A97905300A9F831 /* LaunchScreen.xib */,
 				04E8F46F1A97905300A9F831 /* Main.storyboard */,
+				A2352E461AA3EFCC0023573F /* delete.atlas */,
 				A29E99AA1AA146BF00FA7D81 /* shield.atlas */,
 				A29E99931AA1357900FA7D81 /* jump.atlas */,
 				A2CBE9DC1A9EB7A7009774B8 /* run.atlas */,
@@ -199,6 +202,7 @@
 				TargetAttributes = {
 					04E8F45C1A97905200A9F831 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 6538694R26;
 					};
 					04E8F47A1A97905300A9F831 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -232,6 +236,7 @@
 			files = (
 				A29E99AB1AA146BF00FA7D81 /* shield.atlas in Resources */,
 				04E8F4761A97905300A9F831 /* LaunchScreen.xib in Resources */,
+				A2352E471AA3EFCC0023573F /* delete.atlas in Resources */,
 				A29E99941AA1357900FA7D81 /* jump.atlas in Resources */,
 				04E8F4731A97905300A9F831 /* Images.xcassets in Resources */,
 				A2CBE9DD1A9EB7A7009774B8 /* run.atlas in Resources */,
@@ -382,12 +387,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Endless Runner/Endless Runner.pch";
 				INFOPLIST_FILE = "Endless Runner/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -396,12 +403,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Endless Runner/Endless Runner.pch";
 				INFOPLIST_FILE = "Endless Runner/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

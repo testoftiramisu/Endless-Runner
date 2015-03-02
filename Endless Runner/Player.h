@@ -22,8 +22,8 @@ typedef enum playerState {
 @property (strong, nonatomic) NSMutableArray *runFrames;
 @property (strong, nonatomic) NSMutableArray *jumpFrames;
 
-@property (strong, nonatomic) NSMutableArray *shildOnFrames;
-@property (strong, nonatomic) NSMutableArray *shildOffFrames;
+@property (strong, nonatomic) NSMutableArray *shieldOnFrames;
+@property (strong, nonatomic) NSMutableArray *shieldOffFrames;
 @property (strong, nonatomic) SKSpriteNode *shield;
 @property (assign, nonatomic) BOOL shielded;
 
