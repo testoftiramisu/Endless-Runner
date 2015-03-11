@@ -32,8 +32,6 @@
         [self addChild:self.currentParallax];
     }
     
-    self.physicsWorld.gravity = CGVectorMake(0, globalGravity);
-    
     Player *player = [[Player alloc] init];
     player.position = CGPointMake(150, (player.size.height / 2) + 1);
     self.currentPlayer = player;
@@ -62,6 +60,9 @@
     for (int i = 0; i < maximumPowerups; ++i) {
         [self addChild:[self spawnPowerup]];
     }
+    
+    self.physicsWorld.gravity = CGVectorMake(0, globalGravity);
+    self.physicsWorld.contactDelegate = self;
     
     return self;
 }
@@ -195,6 +196,7 @@
         self.currentParallax = tempParallax;
     }
     
+    // Accelerometer support is disabled:
     // Player *player = self.currentPlayer;
     // float delta =
     // (self.manager.accelerometerData.acceleration.x - self.baseline) * accelerometerMultiplier;
@@ -202,9 +204,10 @@
     // Player position
     // player.position = CGPointMake(player.position.x, player.position.y - delta);
     
-    // Score update
+    // Score update:
     self.score = self.score + (backgroundMoveSpeed * timeSinceLast / 100);
     
+    // Jamp handling:
     [self enumerateChildNodesWithName:@"player"
                            usingBlock:^(SKNode *node, BOOL *stop) {
                                Player *enumeratedPlayer = (Player *)node;
@@ -218,6 +221,7 @@
                            }
      ];
     
+    // Enemy moving
     [self enumerateChildNodesWithName:@"enemy"
                            usingBlock:^(SKNode *node, BOOL *stop)
     {
@@ -229,6 +233,7 @@
         }
     }];
     
+    // Moving of Shield powerup
     [self enumerateChildNodesWithName:@"shieldPowerup"
                            usingBlock:^(SKNode *node, BOOL *stop)
     {
@@ -255,6 +260,34 @@
     temp.name = @"shieldPowerup";
     temp.position = CGPointMake(self.size.width + arc4random() % 100, arc4random() % 240 + 40);
     return temp;
+}
+
+- (void)didBeginContact:(SKPhysicsContact *)contact
+{
+    Player *player = nil;
+    
+    if (contact.bodyA.categoryBitMask == playerBitmask) {
+        player = (Player *)contact.bodyA.node;
+        if (contact.bodyB.categoryBitMask == shieldPowerupBitmask) {
+            player.shielded = YES;
+            contact.bodyB.node.hidden = YES;
+        }
+        if (contact.bodyB.categoryBitMask == enemyBitmask) {
+            [player takeDamage];
+            contact.bodyB.node.hidden = YES;
+        }
+    }else {
+        player = (Player *)contact.bodyB.node;
+        if (contact.bodyA.categoryBitMask == shieldPowerupBitmask) {
+            player.shielded = YES;
+            contact.bodyA.node.hidden = YES;
+        }
+        if (contact.bodyA.categoryBitMask == enemyBitmask) {
+            [player takeDamage];
+            contact.bodyA.node.hidden = YES;
+        }
+    }
+    
 }
 
 @end

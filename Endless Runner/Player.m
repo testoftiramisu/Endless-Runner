@@ -20,8 +20,11 @@
         [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.size.width, self.size.height)];
         self.physicsBody.dynamic = YES;
         self.physicsBody.mass = playerMass;
-        self.physicsBody.collisionBitMask = (unsigned)playerCollisionBitmask;
+        self.physicsBody.contactTestBitMask = shieldPowerupBitmask | enemyBitmask;
+        self.physicsBody.collisionBitMask = groundBitmask;
+        self.physicsBody.categoryBitMask = playerBitmask;
         self.physicsBody.allowsRotation = NO;
+        
         [self setupAnimations];
         [self runAction:[SKAction repeatActionForever:
                          [SKAction animateWithTextures:self.runFrames
@@ -103,7 +106,6 @@
                                                restore:NO]]
                 withKey:@"running"];
          }
-    self.shielded = NO;
 }
 
 - (void)stopRunningAnimation
@@ -122,7 +124,6 @@
                 withKey:@"jumping"];
     }
     
-    self.shielded = YES;
 }
 
 - (void)setAnimationState:(playerState)animationState
@@ -191,6 +192,16 @@
             self.engineEmitter.hidden = YES;
     }
     _accelerating = accelerating;
+}
+
+- (void)takeDamage
+{
+    if (self.shielded) {
+        self.shielded = NO;
+    } else {
+        self.hidden = YES;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"playerDied" object:nil];
+    }
 }
 
 @end

@@ -21,7 +21,7 @@
     // background buttom edge
     background.physicsBody =
     [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, 15) toPoint:CGPointMake(background.size.width, 15)];
-    background.physicsBody.collisionBitMask = (unsigned)playerCollisionBitmask;
+    background.physicsBody.collisionBitMask = playerBitmask;
     
     // Background top edge
     SKNode *topCollider = [SKNode node];

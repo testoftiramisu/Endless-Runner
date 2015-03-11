@@ -20,7 +20,7 @@
     [self addChild:self.emitter];
     self.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:20];
     self.physicsBody.contactTestBitMask = playerBitmask;
-    self.physicsBody.categoryBitMask = shieldPowerBitmask;
+    self.physicsBody.categoryBitMask = shieldPowerupBitmask;
     self.physicsBody.collisionBitMask = 0;
     self.physicsBody.affectedByGravity = NO;
 }

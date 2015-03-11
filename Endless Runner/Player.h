@@ -29,4 +29,6 @@ typedef enum playerState {
 
 @property (strong, nonatomic) SKEmitterNode *engineEmitter;
 
+- (void)takeDamage;
+
 @end
