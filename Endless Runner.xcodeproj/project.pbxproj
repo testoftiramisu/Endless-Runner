@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04DE29BF1AB1DBAD00EC6298 /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DE29BE1AB1DBAD00EC6298 /* GameOverScene.m */; };
 		04E8F4631A97905200A9F831 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E8F4621A97905200A9F831 /* main.m */; };
 		04E8F4661A97905200A9F831 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E8F4651A97905200A9F831 /* AppDelegate.m */; };
 		04E8F4691A97905200A9F831 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E8F4681A97905200A9F831 /* GameScene.m */; };
@@ -41,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04DE29BD1AB1DBAD00EC6298 /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
+		04DE29BE1AB1DBAD00EC6298 /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
 		04E8F45D1A97905200A9F831 /* Endless Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Endless Runner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04E8F4611A97905200A9F831 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04E8F4621A97905200A9F831 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -131,6 +134,8 @@
 				A2CB2E201AA50F0E00F72740 /* Powerup.m */,
 				04E8F4671A97905200A9F831 /* GameScene.h */,
 				04E8F4681A97905200A9F831 /* GameScene.m */,
+				04DE29BD1AB1DBAD00EC6298 /* GameOverScene.h */,
+				04DE29BE1AB1DBAD00EC6298 /* GameOverScene.m */,
 				04E8F46A1A97905200A9F831 /* GameScene.sks */,
 				A2CB2E181AA4EFE500F72740 /* jet.sks */,
 				A2CB2E221AA51A1300F72740 /* enemy.sks */,
@@ -224,10 +229,11 @@
 				TargetAttributes = {
 					04E8F45C1A97905200A9F831 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 6538694R26;
+						DevelopmentTeam = 6R9EPKTSUU;
 					};
 					04E8F47A1A97905300A9F831 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 6R9EPKTSUU;
 						TestTargetID = 04E8F45C1A97905200A9F831;
 					};
 				};
@@ -286,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04E8F46E1A97905200A9F831 /* GameViewController.m in Sources */,
+				04DE29BF1AB1DBAD00EC6298 /* GameOverScene.m in Sources */,
 				04E8F4661A97905200A9F831 /* AppDelegate.m in Sources */,
 				04E8F4691A97905200A9F831 /* GameScene.m in Sources */,
 				A2CAD1E51A97DC5200BD2607 /* Background.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "GameScene.h"
+#import "GameOverScene.h"
 #import "Background.h"
 #import "Player.h"
 #import "Enemy.h"
@@ -64,6 +65,11 @@
     self.physicsWorld.gravity = CGVectorMake(0, globalGravity);
     self.physicsWorld.contactDelegate = self;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(gameOver)
+                                                 name:@"playerDied"
+                                               object:nil];
+    
     return self;
 }
 
@@ -111,9 +117,8 @@
 
 - (void)willMoveFromView:(SKView *)view
 {
-    for (UIGestureRecognizer *recognizer in view.gestureRecognizers) {
-        [view removeGestureRecognizer:recognizer];
-    }
+    UIGestureRecognizer *oldGR = view.gestureRecognizers[0];
+    [view removeGestureRecognizer:oldGR];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -288,6 +293,13 @@
         }
     }
     
+}
+
+- (void)gameOver
+{
+    GameOverScene *newScene = [[GameOverScene alloc] initWithSize:self.size];
+    SKTransition *transition = [SKTransition flipHorizontalWithDuration:0.5];
+    [self.view presentScene:newScene transition:transition];
 }
 
 @end
