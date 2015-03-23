@@ -8,11 +8,13 @@
 
 #import <SpriteKit/SpriteKit.h>
 @import CoreMotion;
+@import AVFoundation;
 
 @class Background;
 @class Player;
 @interface GameScene : SKScene <SKPhysicsContactDelegate>
 
+@property (strong, nonatomic) AVAudioPlayer *musicPlayer;
 @property (strong, nonatomic)Background *currentBackground;
 @property (strong, nonatomic)Background *currentParallax;
 @property (strong, nonatomic)Player *currentPlayer;

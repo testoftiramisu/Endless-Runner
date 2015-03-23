@@ -19,6 +19,10 @@
 		04E8F4821A97905300A9F831 /* Endless_RunnerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E8F4811A97905300A9F831 /* Endless_RunnerTests.m */; };
 		A29E99941AA1357900FA7D81 /* jump.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A29E99931AA1357900FA7D81 /* jump.atlas */; };
 		A29E99AB1AA146BF00FA7D81 /* shield.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A29E99AA1AA146BF00FA7D81 /* shield.atlas */; };
+		A2C80C1F1AC0C5E8007B38F8 /* crash.wav in Resources */ = {isa = PBXBuildFile; fileRef = A2C80C1C1AC0C5E7007B38F8 /* crash.wav */; };
+		A2C80C201AC0C5E8007B38F8 /* shieldCharget.wav in Resources */ = {isa = PBXBuildFile; fileRef = A2C80C1D1AC0C5E7007B38F8 /* shieldCharget.wav */; };
+		A2C80C211AC0C5E8007B38F8 /* shieldSmashed.wav in Resources */ = {isa = PBXBuildFile; fileRef = A2C80C1E1AC0C5E8007B38F8 /* shieldSmashed.wav */; };
+		A2C80C231AC0CC79007B38F8 /* Background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2C80C221AC0CC79007B38F8 /* Background.mp3 */; };
 		A2CAD1E51A97DC5200BD2607 /* Background.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CAD1E41A97DC5200BD2607 /* Background.m */; };
 		A2CAD1E81A97E72900BD2607 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CAD1E71A97E72900BD2607 /* Player.m */; };
 		A2CB2E171AA4AA5200F72740 /* delete.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A2CB2E161AA4AA5200F72740 /* delete.atlas */; };
@@ -62,6 +66,10 @@
 		04E8F4811A97905300A9F831 /* Endless_RunnerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Endless_RunnerTests.m; sourceTree = "<group>"; };
 		A29E99931AA1357900FA7D81 /* jump.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = jump.atlas; sourceTree = "<group>"; };
 		A29E99AA1AA146BF00FA7D81 /* shield.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = shield.atlas; sourceTree = "<group>"; };
+		A2C80C1C1AC0C5E7007B38F8 /* crash.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = crash.wav; sourceTree = "<group>"; };
+		A2C80C1D1AC0C5E7007B38F8 /* shieldCharget.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shieldCharget.wav; sourceTree = "<group>"; };
+		A2C80C1E1AC0C5E8007B38F8 /* shieldSmashed.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shieldSmashed.wav; sourceTree = "<group>"; };
+		A2C80C221AC0CC79007B38F8 /* Background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Background.mp3; sourceTree = "<group>"; };
 		A2CAD1DF1A97D94500BD2607 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		A2CAD1E01A97DB0900BD2607 /* Endless Runner.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Endless Runner.pch"; path = "Endless Runner/Endless Runner.pch"; sourceTree = SOURCE_ROOT; };
 		A2CAD1E31A97DC5200BD2607 /* Background.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Background.h; path = ../Background.h; sourceTree = "<group>"; };
@@ -141,6 +149,10 @@
 				A2CB2E221AA51A1300F72740 /* enemy.sks */,
 				A2CB2E241AA51AC500F72740 /* powerup.sks */,
 				A2CB2E191AA4EFE500F72740 /* spark.png */,
+				A2C80C221AC0CC79007B38F8 /* Background.mp3 */,
+				A2C80C1C1AC0C5E7007B38F8 /* crash.wav */,
+				A2C80C1D1AC0C5E7007B38F8 /* shieldCharget.wav */,
+				A2C80C1E1AC0C5E8007B38F8 /* shieldSmashed.wav */,
 				04E8F4721A97905300A9F831 /* Images.xcassets */,
 				04E8F4741A97905300A9F831 /* LaunchScreen.xib */,
 				04E8F46F1A97905300A9F831 /* Main.storyboard */,
@@ -265,14 +277,18 @@
 				A2CB2E1A1AA4EFE500F72740 /* jet.sks in Resources */,
 				A29E99AB1AA146BF00FA7D81 /* shield.atlas in Resources */,
 				04E8F4761A97905300A9F831 /* LaunchScreen.xib in Resources */,
+				A2C80C1F1AC0C5E8007B38F8 /* crash.wav in Resources */,
 				A2CB2E171AA4AA5200F72740 /* delete.atlas in Resources */,
 				A29E99941AA1357900FA7D81 /* jump.atlas in Resources */,
 				A2CB2E1B1AA4EFE500F72740 /* spark.png in Resources */,
+				A2C80C201AC0C5E8007B38F8 /* shieldCharget.wav in Resources */,
 				04E8F4731A97905300A9F831 /* Images.xcassets in Resources */,
 				A2CBE9DD1A9EB7A7009774B8 /* run.atlas in Resources */,
 				A2CB2E251AA51AC500F72740 /* powerup.sks in Resources */,
+				A2C80C211AC0C5E8007B38F8 /* shieldSmashed.wav in Resources */,
 				A2CB2E231AA51A1300F72740 /* enemy.sks in Resources */,
 				04E8F46B1A97905200A9F831 /* GameScene.sks in Resources */,
+				A2C80C231AC0CC79007B38F8 /* Background.mp3 in Resources */,
 				04E8F4711A97905300A9F831 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

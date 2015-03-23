@@ -157,6 +157,10 @@
                                                            resize:YES
                                                           restore:NO]]
                            withKey:@"shieldOn"];
+            
+            SKAction *musicAction = [SKAction playSoundFileNamed:@"shieldCharget.wav"
+                                               waitForCompletion:NO];
+            [self runAction:musicAction];
         }
     } else if (_shielded){
         [self blinkRed];
@@ -167,6 +171,9 @@
                                                      restore:NO]
                        withKey:@"shieldOff"];
         
+        SKAction *musicAction = [SKAction playSoundFileNamed:@"shieldSmashed.wav"
+                                           waitForCompletion:NO];
+        [self runAction:musicAction];
     }
     _shielded = shielded;
 }
@@ -196,6 +203,10 @@
 
 - (void)takeDamage
 {
+    SKAction *musicAction = [SKAction playSoundFileNamed:@"crash.wav"
+                                       waitForCompletion:NO];
+    [self runAction:musicAction];
+    
     if (self.shielded) {
         self.shielded = NO;
     } else {

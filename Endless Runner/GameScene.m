@@ -69,7 +69,7 @@
                                              selector:@selector(gameOver)
                                                  name:@"playerDied"
                                                object:nil];
-    
+    [self setupMusic];
     return self;
 }
 
@@ -300,6 +300,18 @@
     GameOverScene *newScene = [[GameOverScene alloc] initWithSize:self.size];
     SKTransition *transition = [SKTransition flipHorizontalWithDuration:0.5];
     [self.view presentScene:newScene transition:transition];
+    [self.musicPlayer stop];
+}
+
+- (void)setupMusic
+{
+    NSString *musicPatch =[[NSBundle mainBundle] pathForResource:@"Background"
+                                                          ofType:@"mp3"];
+    self.musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:musicPatch]
+                                                              error:NULL];
+    self.musicPlayer.numberOfLoops = -1;
+    self.musicPlayer.volume = 1.0;
+    [self.musicPlayer play];
 }
 
 @end
