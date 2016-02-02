@@ -72,8 +72,8 @@
 		A2C80C221AC0CC79007B38F8 /* Background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Background.mp3; sourceTree = "<group>"; };
 		A2CAD1DF1A97D94500BD2607 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		A2CAD1E01A97DB0900BD2607 /* Endless Runner.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Endless Runner.pch"; path = "Endless Runner/Endless Runner.pch"; sourceTree = SOURCE_ROOT; };
-		A2CAD1E31A97DC5200BD2607 /* Background.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Background.h; path = ../Background.h; sourceTree = "<group>"; };
-		A2CAD1E41A97DC5200BD2607 /* Background.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Background.m; path = ../Background.m; sourceTree = "<group>"; };
+		A2CAD1E31A97DC5200BD2607 /* Background.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Background.h; sourceTree = "<group>"; };
+		A2CAD1E41A97DC5200BD2607 /* Background.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Background.m; sourceTree = "<group>"; };
 		A2CAD1E61A97E72900BD2607 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		A2CAD1E71A97E72900BD2607 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		A2CB2E161AA4AA5200F72740 /* delete.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = delete.atlas; sourceTree = "<group>"; };
@@ -236,7 +236,7 @@
 		04E8F4551A97905200A9F831 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Denys Khlivnyy";
 				TargetAttributes = {
 					04E8F45C1A97905200A9F831 = {
@@ -377,6 +377,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -444,6 +445,7 @@
 				GCC_PREFIX_HEADER = "Endless Runner/Endless Runner.pch";
 				INFOPLIST_FILE = "Endless Runner/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "TOT.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -460,6 +462,7 @@
 				GCC_PREFIX_HEADER = "Endless Runner/Endless Runner.pch";
 				INFOPLIST_FILE = "Endless Runner/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "TOT.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -479,6 +482,7 @@
 				);
 				INFOPLIST_FILE = "Endless RunnerTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "TOT.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Endless Runner.app/Endless Runner";
 			};
@@ -494,6 +498,7 @@
 				);
 				INFOPLIST_FILE = "Endless RunnerTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "TOT.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Endless Runner.app/Endless Runner";
 			};

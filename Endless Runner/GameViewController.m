@@ -35,7 +35,7 @@
     [super viewDidLoad];
 }
 
-- (void) viewDidLayoutSubviews
+- (void)viewDidLayoutSubviews
 {
     // Configure the view
     [super viewDidLayoutSubviews];
@@ -60,7 +60,7 @@
     return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         return UIInterfaceOrientationMaskAllButUpsideDown;
